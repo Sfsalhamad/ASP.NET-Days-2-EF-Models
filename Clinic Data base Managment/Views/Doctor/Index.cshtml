@@ -1,0 +1,19 @@
+﻿@model List<DoctorVM>
+@{
+    ViewData["Title"] = "Doctors";
+}
+
+<div class="d-flex justify-content-end mb-3">
+    <a class="btn btn-primary" asp-area="" asp-controller="Doctor" asp-action="Create">Create Doctor</a>
+</div>
+
+@foreach (var a in Model)
+{
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">@a.name</h5>
+            <p class="card-text">Specialty: @a.specilaty</p>
+            <p class="card-text">Description: @a.description</p>
+        </div>
+    </div>
+}
