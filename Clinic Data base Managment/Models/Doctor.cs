@@ -1,4 +1,7 @@
-﻿namespace Clinic_Data_base_Managment.Models
+﻿
+using Clinic_Data_base_Managment.ViewModel;
+
+namespace Clinic_Data_base_Managment.Models
 {
     public class Doctor
     {
@@ -6,6 +9,13 @@
         public string name { get; set; }
         public string specilaty { get; set; }
         public string description { get; set; }
+        public List<Appointment> Appointments { get; set; } = new();
+
+
+
+
+
+
         public static List<Doctor> Doctors = new List<Doctor>
                 {
                     new Doctor
@@ -44,5 +54,31 @@
                         description = "Specialist in bone and joint disorders."
                     }
                 };
+
+        public UpdateVM ToUpdateVM()
+        {
+            return new UpdateVM
+            {
+                id = this.id,
+                name = this.name,
+                specilaty = this.specilaty,
+                description = this.description
+            };
+        }
+        public DoctorVM ToDoctorVM()
+        {
+            return new DoctorVM
+            {
+                id = this.id,
+                name = this.name,
+                specilaty = this.specilaty,
+                description = this.description,
+                Appointments = this.Appointments.Select(a => a.ToAppointmentVM()).ToList()
+            };
+        }
+        // The code you provided is missing a closing brace for the namespace.
+        // Add a closing brace at the end of the file to fix CS1513.
+
     }
 }
+

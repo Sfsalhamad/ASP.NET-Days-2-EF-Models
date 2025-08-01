@@ -1,5 +1,4 @@
 using Clinic_Data_base_Managment;
-using Clinic_Data_base_Managment.Helpers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,6 +23,13 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.AccessDeniedPath = "/Auth/AccessDenied";
 });
 
+// Add explicit anti-forgery configuration
+builder.Services.AddAntiforgery(options =>
+{
+    options.HeaderName = "X-CSRF-TOKEN";
+    options.SuppressXFrameOptionsHeader = false;
+});
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -46,7 +52,5 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-// Seed the admin user and roles
-await AdminSeeder.CreateAdminUser(app);
 
 app.Run();

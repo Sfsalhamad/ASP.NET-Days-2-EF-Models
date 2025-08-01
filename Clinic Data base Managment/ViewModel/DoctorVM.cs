@@ -6,6 +6,8 @@
         public string name { get; set; }
         public string specilaty { get; set; }
         public string description { get; set; }
+        public List<AppointmentVM> Appointments { get; set; } = new List<AppointmentVM>();
+
         public static List<DoctorVM> Doctors = new List<DoctorVM>
                 {
                     new DoctorVM
